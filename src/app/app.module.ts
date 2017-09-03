@@ -2,24 +2,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { TeamDataComponent } from './team-data/team-data.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddDataComponent } from './add-data/add-data.component';
+import { AvailabilityComponent } from './availability/availability.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamDataComponent,
     PageNotFoundComponent,
-    AddDataComponent
+    AddDataComponent,
+    AvailabilityComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    // HttpClientModule,
     routes
   ],
   providers: [],

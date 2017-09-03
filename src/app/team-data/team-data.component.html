@@ -1,15 +1,32 @@
 hehehe
 <div>
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">
         <thead>
             <tr>
-                <td>Player name</td>
+                <th>Player name</th>
+                <th>Role</th>
+                <th>Total Runs Scored</th>
+                <th>Total Balls Played</th>
+                <th>Not outs</th>
+                <th>High score</th>
+                <th>Overs Bowled</th>
+                <th>Wickets Taken</th>
             </tr>
+            <tr></tr>
         </thead>
         <tbody>
-            <tr>
-                <td>yo</td>
-            </tr>
+            <ng-container *ngFor="let playerStats of this.playersStats">
+                <tr>
+                    <td>{{playerStats.playerName}}</td>
+                    <td>{{playerStats.playerAttribute}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
 </div>

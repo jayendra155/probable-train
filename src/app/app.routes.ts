@@ -5,6 +5,7 @@ import { TeamDataComponent } from './team-data/team-data.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppComponent } from './app.component';
 import { AddDataComponent } from './add-data/add-data.component';
+import { AvailabilityComponent } from './availability/availability.component';
 
 
 export const router: Routes = [
@@ -24,6 +25,10 @@ export const router: Routes = [
     {
         path: 'addData',
         component: AddDataComponent
+    },
+    {
+        path: 'availability',
+        component: AvailabilityComponent
     },
     {
         path: '**',
