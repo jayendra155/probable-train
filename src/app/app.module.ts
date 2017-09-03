@@ -10,6 +10,7 @@ import { TeamDataComponent } from './team-data/team-data.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddDataComponent } from './add-data/add-data.component';
 import { AvailabilityComponent } from './availability/availability.component';
+import { NameFilterPipe } from './team-data/name-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AvailabilityComponent } from './availability/availability.component';
     TeamDataComponent,
     PageNotFoundComponent,
     AddDataComponent,
-    AvailabilityComponent
+    AvailabilityComponent,
+    NameFilterPipe
   ],
   imports: [
     BrowserModule,

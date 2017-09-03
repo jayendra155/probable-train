@@ -1,30 +1,47 @@
-hehehe
+<form action="#">
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="nameFilter" name="searchText" [(ngModel)]="searchText">
+        <label class="mdl-textfield__label">Search Player name</label>
+    </div>
+</form>
+
+
 <div>
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--0dp">
         <thead>
             <tr>
-                <th>Player name</th>
-                <th>Role</th>
+                <th rowspan="2">Player name</th>
+                <th rowspan="2">Role</th>
+                <th colspan="5" style="text-align:center">Batting Stats</th>
+                <th colspan="4" style="text-align:center">Bowling Stats</th>
+            </tr>
+            <tr>
+
                 <th>Total Runs Scored</th>
                 <th>Total Balls Played</th>
                 <th>Not outs</th>
                 <th>High score</th>
+                <th>Average</th>
                 <th>Overs Bowled</th>
                 <th>Wickets Taken</th>
+                <th>Economy Rate</th>
+                <th>Best Figures</th>
             </tr>
-            <tr></tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let playerStats of this.playersStats">
+            <ng-container *ngFor="let playerStats of this.playersStats | nameFilterPipe: searchText">
                 <tr>
                     <td>{{playerStats.playerName}}</td>
                     <td>{{playerStats.playerAttribute}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{playerStats.battingStats.totalRunsScored}}</td>
+                    <td>{{playerStats.battingStats.totalBallsPlayed}}</td>
+                    <td>{{playerStats.battingStats.notOuts}}</td>
+                    <td>{{playerStats.battingStats.highestScore}}</td>
+                    <td>{{playerStats.battingStats.battingAverage}}</td>
+                    <td>{{playerStats.bowlingStats.oversBowled}}</td>
+                    <td>{{playerStats.bowlingStats.wicketsTaken}}</td>
+                    <td>{{playerStats.bowlingStats.economyRate}}</td>
+                    <td>{{playerStats.bowlingStats.bestFiguresWicket}}/{{playerStats.bowlingStats.bestFiguresRunsGiven}}</td>
                 </tr>
             </ng-container>
         </tbody>
