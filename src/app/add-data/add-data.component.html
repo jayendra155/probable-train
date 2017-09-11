@@ -1,3 +1,25 @@
-<p>
-    To be implemented
-</p>
+<div>
+    <form style="text-align:center">
+        <input type="number" max="15" min="8" required='true' value="11" name='limit' [(ngModel)]="numberOfPlayersInMatch">
+        <div id="numberOfPlayers">
+            <table border="1">
+                <tr>
+                    <th>Player Name</th>
+                    <th>id</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="names" id="names" [(ngModel)]="playerNames">
+                                                    <option *ngFor = "let playerName of playerNames" [value]="playerName.id" name="player">
+                                                        {{playerName.playerName}}
+                                                    </option>
+                                    </select>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+
+    </form>
+</div>

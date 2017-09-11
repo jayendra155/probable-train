@@ -5,6 +5,7 @@ import { PlayerStats } from './player-stats';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { NameFilterPipe } from './name-filter.pipe';
+import { DataTableModule } from 'angular2-datatable';
 
 @Component({
   selector: 'app-team-data',
@@ -15,15 +16,16 @@ import { NameFilterPipe } from './name-filter.pipe';
 export class TeamDataComponent implements OnInit {
 
   playersStats: PlayerStats[];
+  searchText: string;
   private responseData: string;
   private elementsRecieved: Number;
   constructor(private http: Http) {
-
   }
 
   ngOnInit() {
     this.playersStats = new Array();
-    this.http.get('http://localhost:8080/api/players?page=0&size=30')
+    const baseEndpoint = 'http://localhost:8080/api/players';
+    this.getData(baseEndpoint, 0, 30)
       .subscribe(response => {
         console.log('Status : ' + response.statusText);
         this.playersStats = JSON.parse(JSON.stringify(response.json()['_embedded']['players']));
@@ -37,6 +39,11 @@ export class TeamDataComponent implements OnInit {
   private handleErrorObservable(error: Response | any) {
     console.error(error.message || error);
     return Observable.throw(error.message || error);
+  }
+
+  private getData(baseEndpoint: String, page: Number, size: Number) {
+    const url = baseEndpoint + '?page=' + page + '&size=' + size;
+    return this.http.get(url);
   }
 
 }

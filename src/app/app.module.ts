@@ -11,6 +11,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AddDataComponent } from './add-data/add-data.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { NameFilterPipe } from './team-data/name-filter.pipe';
+import { DataTableModule } from 'angular2-datatable';
+import { APP_CONFIG, AppConfig } from './app.config';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,12 @@ import { NameFilterPipe } from './team-data/name-filter.pipe';
     FormsModule,
     HttpModule,
     // HttpClientModule,
+    DataTableModule,
     routes
   ],
-  providers: [],
+  providers: [
+    { provide: APP_CONFIG, useValue: AppConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
