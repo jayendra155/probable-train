@@ -5,5 +5,6 @@ export class BowlingStats {
     public economyRate: Number;
     public bestFiguresWicket: Number;
     public bestFiguresRunsGiven: Number;
+    public totalRunsGiven: Number;
 
 }

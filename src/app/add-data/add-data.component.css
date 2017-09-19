@@ -1,0 +1,15 @@
+.inline {
+    display: inline-block;
+    border: 1px solid orange;
+    margin:10px;
+    align-self: baseline;
+    }
+
+th, td {
+    text-align:center;
+}
+
+.fixed-top {
+    margin-top: 0px;
+    /* top: auto; */
+}

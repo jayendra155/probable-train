@@ -1,7 +1,7 @@
 import { BattingStats } from './batting-stats';
 import { BowlingStats } from './bowling-stats';
 
-export class PlayerStats {
+export class Player {
 
     public id: Number;
     public playerName: String;
@@ -9,4 +9,8 @@ export class PlayerStats {
     public battingStats: BattingStats;
     public bowlingStats: BowlingStats;
 
+    constructor(){
+        this.battingStats = new BattingStats();
+        this.bowlingStats = new BowlingStats();
+    }
 }

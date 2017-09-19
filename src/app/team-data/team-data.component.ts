@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { PlayerStats } from './player-stats';
+import { Player } from './player';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { NameFilterPipe } from './name-filter.pipe';
@@ -15,7 +15,7 @@ import { DataTableModule } from 'angular2-datatable';
 })
 export class TeamDataComponent implements OnInit {
 
-  playersStats: PlayerStats[];
+  playersStats: Player[];
   searchText: string;
   private responseData: string;
   private elementsRecieved: Number;
@@ -24,7 +24,8 @@ export class TeamDataComponent implements OnInit {
 
   ngOnInit() {
     this.playersStats = new Array();
-    const baseEndpoint = 'http://localhost:8080/api/players';
+     //'http://192.168.0.101:8080/api/players';
+     const baseEndpoint = 'http://localhost:8080/api/players';
     this.getData(baseEndpoint, 0, 30)
       .subscribe(response => {
         console.log('Status : ' + response.statusText);
