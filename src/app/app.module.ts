@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-// import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app.routes';
 
 import { AppComponent } from './app.component';
@@ -11,8 +10,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AddDataComponent } from './add-data/add-data.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { NameFilterPipe } from './team-data/name-filter.pipe';
-import { DataTableModule } from 'angular2-datatable';
-import { APP_CONFIG, AppConfig } from './app.config';
 
 @NgModule({
   declarations: [
@@ -27,12 +24,9 @@ import { APP_CONFIG, AppConfig } from './app.config';
     BrowserModule,
     FormsModule,
     HttpModule,
-    // HttpClientModule,
-    DataTableModule,
     routes
   ],
   providers: [
-    { provide: APP_CONFIG, useValue: AppConfig }
   ],
   bootstrap: [AppComponent]
 })

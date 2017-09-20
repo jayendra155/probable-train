@@ -6,7 +6,8 @@ import 'rxjs/add/operator/catch';
 import { PagedData } from '../util/paged-data';
 import { OnChanges, SimpleChanges, Input } from '@angular/core';
 import { PerMatchPlayerStat } from './per-match-player-stat';
-import { baseUrl } from '../util/util';
+import { NgForm } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-add-data',
@@ -29,23 +30,25 @@ export class AddDataComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.playerNames = new Array(11);
+
     this.perMatchPlayerStat = new PerMatchPlayerStat();
-    const baseEndpoint = 'http://localhost:8080'; // 'http://192.168.0.101:8080'
+    const baseEndpoint = environment.serverUrl;
     const nameEndpoint = '/api/players';
     const projection = 'getPlayerNames';
     const page = 0;
     document.getElementById('availability').classList.remove('is-active');
     document.getElementById('displayData').classList.remove('is-active');
     document.getElementById('addData').className += ' is-active';
-    this.http.get(baseUrl + nameEndpoint).subscribe(response => {
+    this.http.get(baseEndpoint + nameEndpoint).subscribe(response => {
       this.page = JSON.parse(JSON.stringify(response.json()['page']));
+      console.log('Aaya');
+      console.log(this.page.totalElements);
+      this.playerNames = new Array(this.page.totalElements.valueOf());
       const that = this;
       that.getData(baseEndpoint + nameEndpoint, projection, this.page.totalElements)
         .subscribe(response2 => {
           that.playerNames = JSON.parse(JSON.stringify(response2.json()['_embedded']['players']));
           that.elementsRecieved = Number(JSON.stringify(response2.json()['page']['size']));
-          // this.page = JSON.parse(JSON.stringify(response.json()['page']));
           console.log('Names : ' + JSON.stringify(that.playerNames));
         }, error => {
           that.handleErrorObservable(error);
@@ -65,14 +68,14 @@ export class AddDataComponent implements OnInit, OnChanges {
     return this.http.get(url);
   }
 
-  public updateData() {
+  public updateData(form: NgForm) {
     console.log(JSON.stringify(this.perMatchPlayerStat));
-    const baseEndpoint = 'http://localhost:8080/addPlayerData';
+    const baseEndpoint = environment.serverUrl + '/addPlayerData';
     this.http.post(baseEndpoint, this.perMatchPlayerStat)
       .subscribe(response => {
-        console.log(response.json());
+        form.reset();
       }, error => {
-        this.handleErrorObservable(error)
+        this.handleErrorObservable(error);
       });
   }
 }

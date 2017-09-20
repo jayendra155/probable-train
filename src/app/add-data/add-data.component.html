@@ -1,5 +1,3 @@
-
-
 <div>
     <form style="text-align:center" #form="ngForm">
         <div id="tableData">
@@ -95,8 +93,7 @@
         <br>
 
 
-        <button type="submit" (click)="updateData()">Submit</button>
+        <button type="submit" (click)="updateData(form);">Submit</button>
 
     </form>
-    {{form.value | json}}
 </div>

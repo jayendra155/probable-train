@@ -6,12 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { NameFilterPipe } from './name-filter.pipe';
 import { DataTableModule } from 'angular2-datatable';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-team-data',
   templateUrl: './team-data.component.html',
   styleUrls: ['./team-data.component.css']
-  // pipes: [NameFilterPipe]
 })
 export class TeamDataComponent implements OnInit {
 
@@ -24,8 +24,7 @@ export class TeamDataComponent implements OnInit {
 
   ngOnInit() {
     this.playersStats = new Array();
-     //'http://192.168.0.101:8080/api/players';
-     const baseEndpoint = 'http://localhost:8080/api/players';
+    const baseEndpoint = environment.serverUrl + '/api/players';
     this.getData(baseEndpoint, 0, 30)
       .subscribe(response => {
         console.log('Status : ' + response.statusText);
