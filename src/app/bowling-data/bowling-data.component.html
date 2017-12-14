@@ -1,0 +1,40 @@
+<form action="#">
+  <div class="mdl-textfield mdl-js-textfield table-centre">
+      <input class="mdl-textfield__input" type="text" id="nameFilter" name="searchText" [(ngModel)]="searchText">
+      <label class="mdl-textfield__label">Search Player name</label>
+  </div>
+</form>
+
+
+<div>
+  <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp table-centre">
+      <thead>
+          <tr>
+              <th rowspan="2">Player name</th>
+              <th rowspan="2">Total Matches Played</th>
+              <th colspan="5" style="text-align:center">Bowling Stats</th>
+          </tr>
+          <tr>
+
+              <th>Overs Bowled</th>
+              <th>Wickets Taken</th>
+              <th>Economy Rate</th>
+              <th>Runs Given</th>
+              <!-- <th>Best Figures(w/r)</th> -->
+          </tr>
+      </thead>
+      <tbody>
+          <ng-container *ngFor="let playerStats of this.playersStats | nameFilterPipe: searchText">
+              <tr>
+                  <td>{{playerStats.playerName}}</td>
+                  <td>{{playerStats.totalMatchesPlayed}}</td>
+                  <td>{{playerStats.bowlingStats.oversBowled}}</td>
+                  <td>{{playerStats.bowlingStats.wicketsTaken}}</td>
+                  <td>{{playerStats.bowlingStats.economyRate}}</td>
+                  <td>{{playerStats.bowlingStats.totalRunsGiven}}</td>
+                  <!-- <td>{{playerStats.bowlingStats.bestFiguresWicket}}/{{playerStats.bowlingStats.bestFiguresRunsGiven}}</td> -->
+              </tr>
+          </ng-container>
+      </tbody>
+  </table>
+</div>
