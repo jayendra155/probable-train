@@ -17,13 +17,13 @@ export const router: Routes = [
     // },
     {
         path: '',
-        redirectTo: 'displayAll',
+        redirectTo: 'battingData',
         pathMatch: 'full'
     },
-    {
-        path: 'displayAll',
-        component: TeamDataComponent
-    },
+    // {
+    //     path: 'displayAll',
+    //     component: TeamDataComponent
+    // },
     {
         path: 'addData',
         component: AddDataComponent
