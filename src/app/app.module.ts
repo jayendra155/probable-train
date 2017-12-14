@@ -10,6 +10,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AddDataComponent } from './add-data/add-data.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { NameFilterPipe } from './team-data/name-filter.pipe';
+import { BowlingDataComponent } from './bowling-data/bowling-data.component';
+import { BattingDataComponent } from './batting-data/batting-data.component';
+import { RecentFormComponent } from './recent-form/recent-form.component';
+import { CssUtilService } from './util/css-util.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,10 @@ import { NameFilterPipe } from './team-data/name-filter.pipe';
     PageNotFoundComponent,
     AddDataComponent,
     AvailabilityComponent,
-    NameFilterPipe
+    NameFilterPipe,
+    BowlingDataComponent,
+    BattingDataComponent,
+    RecentFormComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +34,7 @@ import { NameFilterPipe } from './team-data/name-filter.pipe';
     routes
   ],
   providers: [
+    CssUtilService
   ],
   bootstrap: [AppComponent]
 })

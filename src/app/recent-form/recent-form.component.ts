@@ -5,40 +5,35 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { PagedData } from '../util/paged-data';
 import { OnChanges, SimpleChanges, Input } from '@angular/core';
-import { PerMatchPlayerStat } from './per-match-player-stat';
+import { PlayerName } from '../add-data/add-data.component';
 import { NgForm } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { Elements } from '../util/elements.enum';
 import { CssUtilService } from '../util/css-util.service';
 
 @Component({
-  selector: 'app-add-data',
-  templateUrl: './add-data.component.html',
-  styleUrls: ['./add-data.component.css']
+  selector: 'app-recent-form',
+  templateUrl: './recent-form.component.html',
+  styleUrls: ['./recent-form.component.css']
 })
-export class AddDataComponent implements OnInit, OnChanges {
+export class RecentFormComponent implements OnInit {
 
+  playerNames: PlayerName[];
   private elementsRecieved: Number;
   private page: PagedData;
-  playerNames: PlayerName[];
-  public perMatchPlayerStat: PerMatchPlayerStat;
+  playerId: Number;
 
   constructor(private http: Http, private cssUtilService: CssUtilService) {
     this.page = new PagedData();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // changes.prop contains the old and the new value...
-  }
-
   ngOnInit() {
-
-    this.perMatchPlayerStat = new PerMatchPlayerStat();
     const baseEndpoint = environment.serverUrl;
     const nameEndpoint = '/api/players';
     const projection = 'getPlayerNames';
     const page = 0;
-    this.cssUtilService.makeTabActive(Elements.addData);
+    this.playerNames = new Array(1);
+    this.cssUtilService.makeTabActive(Elements.recentForm);
     this.http.get(baseEndpoint + nameEndpoint).subscribe(response => {
       this.page = JSON.parse(JSON.stringify(response.json()['page']));
       console.log(this.page.totalElements);
@@ -53,12 +48,6 @@ export class AddDataComponent implements OnInit, OnChanges {
           that.handleErrorObservable(error);
         });
     });
-
-  }
-
-  private handleErrorObservable(error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.message || error);
   }
 
   private getData(baseEndpoint: String, projection: String, numberOfELements: Number) {
@@ -67,19 +56,9 @@ export class AddDataComponent implements OnInit, OnChanges {
     return this.http.get(url);
   }
 
-  public updateData(form: NgForm) {
-    console.log(JSON.stringify(this.perMatchPlayerStat));
-    const baseEndpoint = environment.serverUrl + '/addPlayerData';
-    this.http.post(baseEndpoint, this.perMatchPlayerStat)
-      .subscribe(response => {
-        form.reset();
-      }, error => {
-        this.handleErrorObservable(error);
-      });
+  private handleErrorObservable(error: Response | any) {
+    console.error(error.message || error);
+    return Observable.throw(error.message || error);
   }
-}
 
-export class PlayerName {
-  playerName: String;
-  id: Number;
 }
