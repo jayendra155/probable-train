@@ -9,6 +9,7 @@ import { DataTableModule } from 'angular2-datatable';
 import { environment } from '../../environments/environment';
 import { Elements } from '../util/elements.enum';
 import { CssUtilService } from '../util/css-util.service';
+import { Direction } from '../util/direction-enum';
 
 @Component({
   selector: 'app-bowling-data',
@@ -28,7 +29,7 @@ export class BowlingDataComponent implements OnInit {
   ngOnInit() {
     this.playersStats = new Array();
     const baseEndpoint = environment.serverUrl + '/api/players';
-    this.getData(baseEndpoint, 0, 30)
+    this.getData(baseEndpoint, 0, 30, 'bowlingStats.wicketsTaken', Direction.desc)
       .subscribe(response => {
         console.log('Status : ' + response.statusText);
         this.playersStats = JSON.parse(JSON.stringify(response.json()['_embedded']['players']));
@@ -42,8 +43,9 @@ export class BowlingDataComponent implements OnInit {
     return Observable.throw(error.message || error);
   }
 
-  private getData(baseEndpoint: String, page: Number, size: Number) {
-    const url = baseEndpoint + '?page=' + page + '&size=' + size;
+  private getData(baseEndpoint: String, page: Number, size: Number, sort: String, direction: Direction) {
+    const url = baseEndpoint + '?page=' + page + '&size=' + size +
+      '&sort=' + sort + ',' + Direction[direction];
     return this.http.get(url);
   }
 

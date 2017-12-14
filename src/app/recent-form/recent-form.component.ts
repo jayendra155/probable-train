@@ -21,7 +21,7 @@ export class RecentFormComponent implements OnInit {
   playerNames: PlayerName[];
   private elementsRecieved: Number;
   private page: PagedData;
-  private playerId: Number;
+  playerId: Number;
 
   constructor(private http: Http, private cssUtilService: CssUtilService) {
     this.page = new PagedData();
