@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { Elements } from '../util/elements.enum';
 import { CssUtilService } from '../util/css-util.service';
+import { MatchType } from "./MatchType.enum";
 
 @Component({
   selector: 'app-add-data',
@@ -22,6 +23,7 @@ export class AddDataComponent implements OnInit, OnChanges {
   private page: PagedData;
   playerNames: PlayerName[];
   public perMatchPlayerStat: PerMatchPlayerStat;
+  matchTypeKeys = Object.keys(MatchType).filter(key => !isNaN(Number(key))).map(key => ({value: MatchType[key], title: key}));
 
   constructor(private http: Http, private cssUtilService: CssUtilService) {
     this.page = new PagedData();
@@ -32,7 +34,7 @@ export class AddDataComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
+    console.log(JSON.stringify(this.matchTypeKeys));
     this.perMatchPlayerStat = new PerMatchPlayerStat();
     const baseEndpoint = environment.serverUrl;
     const nameEndpoint = '/api/players';
@@ -41,14 +43,14 @@ export class AddDataComponent implements OnInit, OnChanges {
     this.cssUtilService.makeTabActive(Elements.addData);
     this.http.get(baseEndpoint + nameEndpoint).subscribe(response => {
       this.page = JSON.parse(JSON.stringify(response.json()['page']));
-      console.log(this.page.totalElements);
+      // console.log(this.page.totalElements);
       this.playerNames = new Array(this.page.totalElements.valueOf());
       const that = this;
       that.getData(baseEndpoint + nameEndpoint, projection, this.page.totalElements)
         .subscribe(response2 => {
           that.playerNames = JSON.parse(JSON.stringify(response2.json()['_embedded']['players']));
           that.elementsRecieved = Number(JSON.stringify(response2.json()['page']['size']));
-          console.log('Names : ' + JSON.stringify(that.playerNames));
+          // console.log('Names : ' + JSON.stringify(that.playerNames));
         }, error => {
           that.handleErrorObservable(error);
         });

@@ -55,6 +55,14 @@
                                      </select>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Sixes Scored</td>
+                                <td><input type="number" required min="0" max="300" name="sixes" [(ngModel)]="perMatchPlayerStat.sixes"></td>
+                            </tr>
+                            <tr>
+                                <td>Fours Scored</td>
+                                <td><input type="number" required min="0" max="300" name="fours" [(ngModel)]="perMatchPlayerStat.fours"></td>
+                            </tr>
                         </tbody>
                     </ng-container>
                 </table>
@@ -85,14 +93,41 @@
                                 <td>Runs Given</td>
                                 <td><input type="number" required min="0" max="10" name="runsGiven" [(ngModel)]="perMatchPlayerStat.runsGiven"></td>
                             </tr>
+                            <tr>
+                                <td>Wides Bowled</td>
+                                <td><input type="number" required min="0" max="100" name="wides" [(ngModel)]="perMatchPlayerStat.wides"></td>
+                            </tr>
+                            <tr>
+                                <td>No Balls Bowled</td>
+                                <td><input type="number" required min="0" max="100" name="noBalls" [(ngModel)]="perMatchPlayerStat.noBalls"></td>
+                            </tr>
                         </tbody>
                     </ng-container>
                 </table>
             </div>
-        </ng-container>
+        
         <br>
-
-
+        <div id='matchData' class='inline'>
+            <table border="1" class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
+                <thead>
+                    <th>Match Date</th>
+                    <th>Match Type</th>
+                </thead>
+                    <tbody>
+                        <td><input type="date" required name="date" [(ngModel)]="perMatchPlayerStat.date"></td>
+                        <td><select required name="matchType" id="" [(ngModel)]="perMatchPlayerStat.matchType">
+                            <ng-container *ngFor="let key of this.matchTypeKeys">
+                                <option [value]='key.value'>{{key.value}}</option>
+                            <!-- <option [value]="UNKNOWN">UNKNOWN</option>
+                            <option [value]="TOURNAMENT_MATCH">TOURNAMENT</option>
+                            <option [value]="PRACTICE_MATCH">PRACTICE MATCH</option> -->
+                            </ng-container>
+                        </select></td>
+                    </tbody>
+            </table>
+        </div>
+    </ng-container>
+    <br>
         <button type="submit" (click)="updateData(form);">Submit</button>
 
     </form>

@@ -6,4 +6,7 @@ export class BattingStats {
     public notOuts: Number;
     public battingAverage: Number;
     public highestScore: Number;
+    public strikeRate: Number;
+    public totalSixesScored: Number;
+    public totalFoursScored: Number;
 }

@@ -14,6 +14,7 @@ import { BowlingDataComponent } from './bowling-data/bowling-data.component';
 import { BattingDataComponent } from './batting-data/batting-data.component';
 import { RecentFormComponent } from './recent-form/recent-form.component';
 import { CssUtilService } from './util/css-util.service';
+import { NanPipePipe } from './pipes/nan-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CssUtilService } from './util/css-util.service';
     NameFilterPipe,
     BowlingDataComponent,
     BattingDataComponent,
-    RecentFormComponent
+    RecentFormComponent,
+    NanPipePipe
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,6 @@ import { Player } from './player';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { NameFilterPipe } from './name-filter.pipe';
-import { DataTableModule } from 'angular2-datatable';
 import { environment } from '../../environments/environment';
 import { Elements } from '../util/elements.enum';
 import { CssUtilService } from '../util/css-util.service';
