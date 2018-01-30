@@ -1,0 +1,47 @@
+<form action="#">
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="nameFilter" name="searchText" [(ngModel)]="searchText">
+        <label class="mdl-textfield__label">Search Player name</label>
+    </div>
+</form>
+
+<div>
+    <span class="table-center"><h6>6's  and 4's from 2018 only</h6></span>
+</div>
+<div>
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp table-center">
+        <thead>
+            <tr>
+                <th>Player name</th>
+                <th>Matches Played</th>
+                <th>Innings Batted</th>
+                <th>Runs Scored</th>
+                <th>Balls Played</th>
+                <th>Not outs</th>
+                <th>High score</th>
+                <th>Average</th>
+                <th>6s</th>
+                <th>4s</th>
+                <th>Strike Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let playerStats of this.playersStats | nameFilterPipe: searchText">
+                <tr>
+                    <td>{{playerStats.playerName}}</td>
+                    <!-- <td>{{playerStats.playerAttribute}}</td> -->
+                    <td>{{playerStats.totalMatchesPlayed}}</td>
+                    <td>{{playerStats.battingStats.inningsBatted}}</td>
+                    <td>{{playerStats.battingStats.totalRunsScored}}</td>
+                    <td>{{playerStats.battingStats.totalBallsPlayed}}</td>
+                    <td>{{playerStats.battingStats.notOuts}}</td>
+                    <td>{{playerStats.battingStats.highestScore}}</td>
+                    <td>{{playerStats.battingStats.battingAverage}}</td>
+                    <td>{{playerStats.battingStats.totalSixesScored}}</td>
+                    <td>{{playerStats.battingStats.totalFoursScored}}</td>
+                    <td>{{playerStats.battingStats.strikeRate}}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

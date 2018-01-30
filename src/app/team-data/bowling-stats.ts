@@ -6,5 +6,7 @@ export class BowlingStats {
     public bestFiguresWicket: Number;
     public bestFiguresRunsGiven: Number;
     public totalRunsGiven: Number;
+    public totalWidesBowled: Number;
+    public totalNoBallsBowled: Number;
 
 }

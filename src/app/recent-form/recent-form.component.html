@@ -1,0 +1,63 @@
+<div>
+    <form style="text-align:center" #form="ngForm">
+        <div id="tableData">
+            <table name="playerTable" border="1" class="inline mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select name="playerId" [(ngModel)]="playerId" [required]=true>
+                <option [value]=null [selected]="true" disabled>Select Player Name</option>
+                <ng-container *ngFor="let player of playerNames; let i=index">
+                  <option [value]="player.id">
+                    {{player.playerName}}
+                  </option>
+                </ng-container>
+              </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" (click)="updateData(form);">Submit</button>
+    </form>
+
+    <ng-container *ngIf="showDiv==true">
+        <div id="recentFormData" style="text-align:center">
+            <table name="recentFormTable" border="1" class="inline mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
+                <thead>
+                    <tr>
+                        <th>Runs Scored</th>
+                        <th>Balls Played</th>
+                        <th>Strike Rate</th>
+                        <th>Overs Bowled</th>
+                        <th>Runs Given</th>
+                        <th>Wickets Taken</th>
+                        <th>Economy Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let stat of perMatchPlayerStat">
+                        <tr>
+                            <td>{{stat.runsScored==undefined?'DNB':stat.runsScored}}{{stat.notOut==true?'*':''}}</td>
+                            <td>{{stat.ballsPlayed==undefined?'DNB':stat.ballsPlayed}}</td>
+                            <td>{{(stat.ballsPlayed == undefined || stat.ballsPlayed==0)?'DNB':100 * stat.runsScored/stat.ballsPlayed | number : '1.2-2'}}</td>
+                            <td>{{stat.oversBowled==undefined || stat.oversBowled==0?'DNB':stat.oversBowled}}</td>
+                            <td>{{stat.runsGiven==undefined?'-':stat.runsGiven}}</td>
+                            <td>{{stat.wicketsTaken}}</td>
+                            <td>{{(stat.oversBowled==undefined ||stat.oversBowled==0)?'0':stat.runsGiven/stat.oversBowled | number: '1.2-2'}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <br>
+            <ng-container *ngIf="tableElementsRecieved < 1">
+                <span>No stats available</span>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

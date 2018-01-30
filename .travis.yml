@@ -1,0 +1,10 @@
+{
+  "language": "node_js",
+  "group": "stable",
+  "dist": "trusty",
+  "os": "linux",
+  "before_install": "npm install -g @angular/cli"
+  "install": "npm install"
+  "test": "ng build"
+}
+
