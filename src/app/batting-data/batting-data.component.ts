@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 import { Elements } from '../util/elements.enum';
 import { CssUtilService } from '../util/css-util.service';
 import { Direction } from '../util/direction-enum';
+import { ServerStatusService } from '../util/server-status.service';
 
 @Component({
   selector: 'app-batting-data',
@@ -23,11 +24,15 @@ export class BattingDataComponent implements OnInit {
   searchText: string;
   private responseData: string;
   private elementsRecieved: Number;
-  constructor(private http: Http, private cssUtilService: CssUtilService) {
+  serverStatus: boolean;
+  constructor(private http: Http, private cssUtilService: CssUtilService,
+              private serverStatusService: ServerStatusService) {
   }
 
   ngOnInit() {
+    this.elementsRecieved = null;
     this.playersStats = new Array();
+    this.serverStatus = this.serverStatusService.isServerUp();
     const baseEndpoint = environment.serverUrl + '/api/players';
     this.getData(baseEndpoint, 0, 30, 'battingStats.totalRunsScored', Direction.desc)
       .subscribe(response => {

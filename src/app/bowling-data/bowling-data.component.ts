@@ -26,6 +26,7 @@ export class BowlingDataComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.elementsRecieved = null;
     this.playersStats = new Array();
     const baseEndpoint = environment.serverUrl + '/api/players';
     this.getData(baseEndpoint, 0, 30, 'bowlingStats.wicketsTaken', Direction.desc)

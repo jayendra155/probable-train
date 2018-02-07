@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routes } from './app.routes';
+import { MdlModule } from '@angular-mdl/core'
 
 import { AppComponent } from './app.component';
 import { TeamDataComponent } from './team-data/team-data.component';
@@ -15,6 +16,7 @@ import { BattingDataComponent } from './batting-data/batting-data.component';
 import { RecentFormComponent } from './recent-form/recent-form.component';
 import { CssUtilService } from './util/css-util.service';
 import { NanPipePipe } from './pipes/nan-pipe.pipe';
+import { ServerStatusService } from './util/server-status.service';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,12 @@ import { NanPipePipe } from './pipes/nan-pipe.pipe';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routes
+    routes,
+    MdlModule
   ],
   providers: [
-    CssUtilService
+    CssUtilService,
+    ServerStatusService
   ],
   bootstrap: [AppComponent]
 })

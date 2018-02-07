@@ -1,3 +1,25 @@
+<!-- <mdl-tabs mdl-ripple   (mdl-tab-active-changed)="tabChanged($event)">
+    <mdl-tab-panel>
+        <mdl-tab-panel-title routerLink="/battingData">
+            <a id="battingData" routerLink="/battingData" class="mdl-tabs__tab">Batting Stats</a>
+        </mdl-tab-panel-title>
+    </mdl-tab-panel>
+    <mdl-tab-panel routerLink="/bowlingData" (click)="window.location.href='/bowlingdata'">
+        <mdl-tab-panel-title>
+            <a  routerLink="/bowlingData" class="mdl-tabs__tab">Bowling Stats</a>
+        </mdl-tab-panel-title>
+    </mdl-tab-panel>
+    <mdl-tab-panel routerLink="/addData">
+        <mdl-tab-panel-title>
+            <a id="addData" routerLink="/addData" class="mdl-tabs__tab">Add Data</a>
+        </mdl-tab-panel-title>
+    </mdl-tab-panel>
+    <mdl-tab-panel routerLink="/recentForm">
+        <mdl-tab-panel-title>
+            <a id="recentForm"  class="mdl-tabs__tab">Recent Form</a>
+        </mdl-tab-panel-title>
+    </mdl-tab-panel>
+</mdl-tabs> -->
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
     <div class="mdl-tabs__tab-bar">
         <a id="displayData" routerLink="/displayAll" class="mdl-tabs__tab" hidden disabled="true">Display Stats</a>
@@ -9,3 +31,4 @@
     </div>
 </div>
 <router-outlet></router-outlet>
+<dialog-outlet></dialog-outlet>
