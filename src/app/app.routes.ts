@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AddDataComponent } from './add-data/add-data.component';
 import { BowlingDataComponent } from './bowling-data/bowling-data.component';
 import { BattingDataComponent } from './batting-data/batting-data.component';
+import { AvailabilityComponent } from './availability/availability.component';
 import { RecentFormComponent } from './recent-form/recent-form.component';
 
 
@@ -28,10 +29,10 @@ export const router: Routes = [
         path: 'addData',
         component: AddDataComponent
     },
-    // {
-    //     path: 'availability',
-    //     component: AvailabilityComponent
-    // },
+    {
+        path: 'availability',
+        component: AvailabilityComponent
+    },
     {
         path: 'battingData',
         component: BattingDataComponent

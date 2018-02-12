@@ -17,6 +17,7 @@ import { RecentFormComponent } from './recent-form/recent-form.component';
 import { CssUtilService } from './util/css-util.service';
 import { NanPipePipe } from './pipes/nan-pipe.pipe';
 import { ServerStatusService } from './util/server-status.service';
+import { GoogleChartComponent } from './google-chart/google-chart.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ServerStatusService } from './util/server-status.service';
     BowlingDataComponent,
     BattingDataComponent,
     RecentFormComponent,
-    NanPipePipe
+    NanPipePipe,
+    GoogleChartComponent
   ],
   imports: [
     BrowserModule,

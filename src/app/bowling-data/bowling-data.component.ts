@@ -21,7 +21,7 @@ export class BowlingDataComponent implements OnInit {
   playersStats: Player[];
   searchText: string;
   private responseData: string;
-  private elementsRecieved: Number;
+  elementsRecieved: Number;
   constructor(private http: Http, private cssUtilService: CssUtilService) {
   }
 

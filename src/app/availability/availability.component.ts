@@ -7,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvailabilityComponent implements OnInit {
 
+  public chartType: String;
   constructor() { }
 
   ngOnInit() {
-    document.getElementById("addData").classList.remove("is-active");
-    document.getElementById("displayData").classList.remove("is-active");
-    document.getElementById("availability").className += " is-active";
+    this.chartType = 'PieChart';
+    document.getElementById('addData').classList.remove('is-active');
+    document.getElementById('displayData').classList.remove('is-active');
+    document.getElementById('availability').className += ' is-active';
   }
 
 }
