@@ -22,6 +22,7 @@ export class GoogleChartComponent implements OnInit {
         const that: any = this;
         google.charts.setOnLoadCallback(drawChart, that);
         // this.drawChart();
+        // tslint:disable-next-line:no-shadowed-variable
         function drawChart(that) {
             const data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
