@@ -1,6 +1,6 @@
 {
   "name": "stats-view",
-  "version": "1.0.4-SNAPSHOT",
+  "version": "1.0.5-SNAPSHOT",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
