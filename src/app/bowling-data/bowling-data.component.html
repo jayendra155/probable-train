@@ -1,45 +1,61 @@
-<form action="#">
-    <div class="mdl-textfield mdl-js-textfield table-centre">
-        <input class="mdl-textfield__input" type="text" id="nameFilter" name="searchText" [(ngModel)]="searchText">
-        <label class="mdl-textfield__label">Search Player name</label>
-    </div>
-</form>
+<ng-container *ngIf="elementsRecieved===null">
+    <!-- MDL Progress Bar with Indeterminate Progress -->
+    <mdl-progress [indeterminate]="true" class="center"></mdl-progress>
+</ng-container>
 
+<ng-container *ngIf="elementsRecieved==0">
+    <p class="center"><span>
+            <mdl-card mdl-shadow="0">
+                    <mdl-card-title>
+                      <h2 mdl-card-title-text>No player data found</h2>
+                    </mdl-card-title>
+            </mdl-card>
+        </span></p>
+</ng-container>
 
-<div>
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp table-centre">
-        <thead>
-            <!-- <tr>
+<ng-container *ngIf="elementsRecieved!=null && elementsRecieved > 0">
+    <form action="#">
+        <mdl-textfield floating-label type="text" name="searchText" label="Search Player name" [(ngModel)]="searchText" class="center">
+        </mdl-textfield>
+    </form>
+    <div class="center">
+        <p class="center">
+            <span><i>Wides and NoBalls are calculated only for matches after 31/12/2017</i></span>
+        </p>
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp center">
+            <thead>
+                <!-- <tr>
                 <th rowspan="2">Player name</th>
                 <th rowspan="2">Total Matches Played</th>
                 <th colspan="5" style="text-align:center"></th> 
             </tr> -->
-            <tr>
-                <th>Player name</th>
-                <th>Matches Played</th>
-                <th>Overs Bowled</th>
-                <th>Wickets Taken</th>
-                <th>Runs Given</th>
-                <th>Economy Rate</th>
-                <th>Wides</th>
-                <th>No balls</th>
-                <!-- <th>Best Figures(w/r)</th> -->
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let playerStats of this.playersStats | nameFilterPipe: searchText">
                 <tr>
-                    <td>{{playerStats.playerName}}</td>
-                    <td>{{playerStats.totalMatchesPlayed}}</td>
-                    <td>{{playerStats.bowlingStats.oversBowled}}</td>
-                    <td>{{playerStats.bowlingStats.wicketsTaken}}</td>
-                    <td>{{playerStats.bowlingStats.totalRunsGiven}}</td>
-                    <td>{{playerStats.bowlingStats.economyRate}}</td>
-                    <td>{{playerStats.bowlingStats.totalWidesBowled}}</td>
-                    <td>{{playerStats.bowlingStats.totalNoBallsBowled}}</td>
-                    <!-- <td>{{playerStats.bowlingStats.bestFiguresWicket}}/{{playerStats.bowlingStats.bestFiguresRunsGiven}}</td> -->
+                    <th>Player name</th>
+                    <th>Matches Played</th>
+                    <th>Overs Bowled</th>
+                    <th>Wickets Taken</th>
+                    <th>Runs Given</th>
+                    <th>Economy Rate</th>
+                    <th>Wides</th>
+                    <th>No balls</th>
+                    <th>Best Figures(w/r)</th>
                 </tr>
-            </ng-container>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let playerStats of this.playersStats | nameFilterPipe: searchText">
+                    <tr>
+                        <td>{{playerStats.playerName}}</td>
+                        <td>{{playerStats.totalMatchesPlayed}}</td>
+                        <td>{{playerStats.bowlingStats.oversBowled}}</td>
+                        <td>{{playerStats.bowlingStats.wicketsTaken}}</td>
+                        <td>{{playerStats.bowlingStats.totalRunsGiven}}</td>
+                        <td>{{playerStats.bowlingStats.economyRate}}</td>
+                        <td>{{playerStats.bowlingStats.totalWidesBowled}}</td>
+                        <td>{{playerStats.bowlingStats.totalNoBallsBowled}}</td>
+                        <td>{{playerStats.bowlingStats.bestFiguresWicket}}/{{playerStats.bowlingStats.bestFiguresRunsGiven}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</ng-container>

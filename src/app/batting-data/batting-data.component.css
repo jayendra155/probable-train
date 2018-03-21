@@ -1,4 +1,8 @@
-.table-center {
+.center {
     align-items: center;
     margin: auto;
+}
+p {
+    align-items: center;
+    align-self: center;
 }

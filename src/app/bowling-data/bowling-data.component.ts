@@ -21,11 +21,12 @@ export class BowlingDataComponent implements OnInit {
   playersStats: Player[];
   searchText: string;
   private responseData: string;
-  private elementsRecieved: Number;
+  elementsRecieved: Number;
   constructor(private http: Http, private cssUtilService: CssUtilService) {
   }
 
   ngOnInit() {
+    this.elementsRecieved = null;
     this.playersStats = new Array();
     const baseEndpoint = environment.serverUrl + '/api/players';
     this.getData(baseEndpoint, 0, 30, 'bowlingStats.wicketsTaken', Direction.desc)

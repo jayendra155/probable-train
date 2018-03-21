@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CssUtilService } from '../util/css-util.service';
+import { Elements } from '../util/elements.enum';
+import { MdlChipComponent} from '@angular-mdl/core';
 
 @Component({
   selector: 'app-availability',
@@ -7,12 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvailabilityComponent implements OnInit {
 
-  constructor() { }
+  public chartType: String;
+  constructor( private cssUtilService: CssUtilService ) { }
 
   ngOnInit() {
-    document.getElementById("addData").classList.remove("is-active");
-    document.getElementById("displayData").classList.remove("is-active");
-    document.getElementById("availability").className += " is-active";
+    this.chartType = 'PieChart';
+    this.cssUtilService.makeTabActive(Elements.battingData);
   }
 
 }
