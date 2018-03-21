@@ -50,7 +50,6 @@ export class RecentFormComponent implements OnInit {
         .subscribe(response2 => {
           that.playerNames = JSON.parse(JSON.stringify(response2.json()['_embedded']['players']));
           that.elementsRecieved = Number(JSON.stringify(response2.json()['page']['size']));
-          console.log('Names : ' + JSON.stringify(that.playerNames));
         }, error => {
           that.handleErrorObservable(error);
         });
@@ -59,13 +58,11 @@ export class RecentFormComponent implements OnInit {
 
   private getPlayerNames(baseEndpoint: String, projection: String, numberOfELements: Number) {
     const url = baseEndpoint + '?projection=' + projection + '&sort=playerName' + '&size=' + numberOfELements;
-    console.log('URL: ' + url);
     return this.http.get(url);
   }
 
   private getRecentFormData(baseEndpoint: String, playerId: Number, numberOfELements: Number) {
-    const url = baseEndpoint + '?playerId=' + playerId + '&size=' + numberOfELements + '&sort=id,desc';
-    console.log('URL: ' + url);
+    const url = baseEndpoint + '?playerId=' + playerId + '&size=' + numberOfELements + '&sort=date,desc';
     return this.http.get(url);
   }
 

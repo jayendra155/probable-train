@@ -1,0 +1,14 @@
+.sheet-display {
+    height: 300px;
+    width: 60%;
+    /* background-color: powderblue; */
+}
+.center {
+    align-items: center;
+    margin: auto;
+}
+.inline {
+    display: inline-block;
+    margin:10px;
+    align-self: baseline;
+    }

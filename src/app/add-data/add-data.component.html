@@ -1,134 +1,142 @@
-<div>
-    <form style="text-align:center" #form="ngForm">
-        <div id="tableData">
-            <table name="playerTable" border="1" class="inline mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
-                <thead>
-                    <tr>
-                        <th>Player Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <select name="playerId" [(ngModel)]="perMatchPlayerStat.player.id" [required]=true>
-                                <option [value]=null [selected]="true" disabled >Select Player Name</option>
-                                <ng-container *ngFor="let player of playerNames; let i=index">
-                                <option [value]="player.id">
-                                    {{player.playerName}}
-                                </option>
+<ng-container *ngIf="playerNames.length == 0">
+    <span>
+        <h3>Fetching player names....</h3>
+    </span>
+    <mdl-progress [indeterminate]="true" class="center"></mdl-progress>
+</ng-container>
+<ng-container *ngIf="playerNames.length>0">
+        <div>
+                <form style="text-align:center" #form="ngForm">
+                    <div id="tableData">
+                        <table name="playerTable" border="1" class="inline mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select name="playerId" [(ngModel)]="perMatchPlayerStat.player.id" [required]=true>
+                                            <option [value]=null [selected]="true" disabled >Select Player Name</option>
+                                            <ng-container *ngFor="let player of playerNames; let i=index">
+                                            <option [value]="player.id">
+                                                {{player.playerName}}
+                                            </option>
+                                            </ng-container>
+                                         </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <ng-container *ngIf="(perMatchPlayerStat.player.id)!=null">
+                        <div id='batting' class="inline">
+                            <table border="1" class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
+                                <thead>
+                                    <tr>
+                                        <th> Has he batted?</th>
+                                        <th><select name="hasBatted" [(ngModel)]="perMatchPlayerStat.hasBatted" required>
+                                                                <option [value]="true">YES</option>
+                                                                <option [value]=false>NO</option>
+                                            </select>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <ng-container *ngIf="perMatchPlayerStat.hasBatted==='true'">
+                                    <tbody>
+                                        <tr>
+                                            <td>Runs Scored : </td>
+                                            <td><input type="number" required min="0" max="300" value="0" name="runsScored" [(ngModel)]="perMatchPlayerStat.runsScored"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Balls Played</td>
+                                            <td><input type="number" required min="0" max="300" name="ballsPlayed" [(ngModel)]="perMatchPlayerStat.ballsPlayed"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stayed Not Out ? </td>
+                                            <td><select name="notOut" [(ngModel)]="perMatchPlayerStat.notOut" required>
+                                                        <option [value]="true">YES</option>
+                                                        <option [value]="false">NO</option>
+                                                 </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sixes Scored</td>
+                                            <td><input type="number" required min="0" max="300" name="sixes" [(ngModel)]="perMatchPlayerStat.sixes"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fours Scored</td>
+                                            <td><input type="number" required min="0" max="300" name="fours" [(ngModel)]="perMatchPlayerStat.fours"></td>
+                                        </tr>
+                                    </tbody>
                                 </ng-container>
-                             </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <br>
-        <ng-container *ngIf="(perMatchPlayerStat.player.id)!=null">
-            <div id='batting' class="inline">
-                <table border="1" class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
-                    <thead>
-                        <tr>
-                            <th> Has he batted?</th>
-                            <th><select name="hasBatted" [(ngModel)]="perMatchPlayerStat.hasBatted" required>
-                                                    <option [value]="true">YES</option>
-                                                    <option [value]=false>NO</option>
-                                </select>
-                            </th>
-                        </tr>
-                    </thead>
-                    <ng-container *ngIf="perMatchPlayerStat.hasBatted==='true'">
-                        <tbody>
-                            <tr>
-                                <td>Runs Scored : </td>
-                                <td><input type="number" required min="0" max="300" value="0" name="runsScored" [(ngModel)]="perMatchPlayerStat.runsScored"></td>
-                            </tr>
-                            <tr>
-                                <td>Balls Played</td>
-                                <td><input type="number" required min="0" max="300" name="ballsPlayed" [(ngModel)]="perMatchPlayerStat.ballsPlayed"></td>
-                            </tr>
-                            <tr>
-                                <td>Stayed Not Out ? </td>
-                                <td><select name="notOut" [(ngModel)]="perMatchPlayerStat.notOut" required>
-                                            <option [value]="true">YES</option>
-                                            <option [value]="false">NO</option>
-                                     </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sixes Scored</td>
-                                <td><input type="number" required min="0" max="300" name="sixes" [(ngModel)]="perMatchPlayerStat.sixes"></td>
-                            </tr>
-                            <tr>
-                                <td>Fours Scored</td>
-                                <td><input type="number" required min="0" max="300" name="fours" [(ngModel)]="perMatchPlayerStat.fours"></td>
-                            </tr>
-                        </tbody>
-                    </ng-container>
-                </table>
+                            </table>
+                        </div>
+                        <div id='bowling' class="inline">
+                            <table border="1" class="fixed-top mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
+                                <thead>
+                                    <tr>
+                                        <th> Has he bowled?</th>
+                                        <th><select name="hasBowled" [(ngModel)]="perMatchPlayerStat.hasBowled" required>
+                                                                        <option [value]="true">YES</option>
+                                                                        <option [value]="false">NO</option>
+                                                    </select>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <ng-container *ngIf="perMatchPlayerStat.hasBowled==='true'">
+                                    <tbody>
+                                        <tr>
+                                            <td>Wickets Taken : </td>
+                                            <td><input type="number" required min="0" max="10" name="wicketsTaken" [(ngModel)]="perMatchPlayerStat.wicketsTaken"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Overs Bowled</td>
+                                            <td><input type="number" required min="0" max="10" name="oversBowled" [(ngModel)]="perMatchPlayerStat.oversBowled"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Runs Given</td>
+                                            <td><input type="number" required min="0" max="10" name="runsGiven" [(ngModel)]="perMatchPlayerStat.runsGiven"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Wides Bowled</td>
+                                            <td><input type="number" required min="0" max="100" name="wides" [(ngModel)]="perMatchPlayerStat.wides"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>No Balls Bowled</td>
+                                            <td><input type="number" required min="0" max="100" name="noBalls" [(ngModel)]="perMatchPlayerStat.noBalls"></td>
+                                        </tr>
+                                    </tbody>
+                                </ng-container>
+                            </table>
+                        </div>
+                    
+                    <br>
+                    <div id='matchData' class='inline'>
+                        <table border="1" class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
+                            <thead>
+                                <th>Match Date</th>
+                                <th>Match Type</th>
+                            </thead>
+                                <tbody>
+                                    <td><input type="date" required name="date" [(ngModel)]="perMatchPlayerStat.date"></td>
+                                    <td><select required name="matchType" id="" [(ngModel)]="perMatchPlayerStat.matchType">
+                                        <ng-container *ngFor="let key of this.matchTypeKeys">
+                                            <option [value]='key.value'>{{key.value}}</option>
+                                        <!-- <option [value]="UNKNOWN">UNKNOWN</option>
+                                        <option [value]="TOURNAMENT_MATCH">TOURNAMENT</option>
+                                        <option [value]="PRACTICE_MATCH">PRACTICE MATCH</option> -->
+                                        </ng-container>
+                                    </select></td>
+                                </tbody>
+                        </table>
+                    </div>
+                </ng-container>
+                <br>
+                    <button type="submit" (click)="updateData(form);">Submit</button>
+            
+                </form>
             </div>
-            <div id='bowling' class="inline">
-                <table border="1" class="fixed-top mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
-                    <thead>
-                        <tr>
-                            <th> Has he bowled?</th>
-                            <th><select name="hasBowled" [(ngModel)]="perMatchPlayerStat.hasBowled" required>
-                                                            <option [value]="true">YES</option>
-                                                            <option [value]="false">NO</option>
-                                        </select>
-                            </th>
-                        </tr>
-                    </thead>
-                    <ng-container *ngIf="perMatchPlayerStat.hasBowled==='true'">
-                        <tbody>
-                            <tr>
-                                <td>Wickets Taken : </td>
-                                <td><input type="number" required min="0" max="10" name="wicketsTaken" [(ngModel)]="perMatchPlayerStat.wicketsTaken"></td>
-                            </tr>
-                            <tr>
-                                <td>Overs Bowled</td>
-                                <td><input type="number" required min="0" max="10" name="oversBowled" [(ngModel)]="perMatchPlayerStat.oversBowled"></td>
-                            </tr>
-                            <tr>
-                                <td>Runs Given</td>
-                                <td><input type="number" required min="0" max="10" name="runsGiven" [(ngModel)]="perMatchPlayerStat.runsGiven"></td>
-                            </tr>
-                            <tr>
-                                <td>Wides Bowled</td>
-                                <td><input type="number" required min="0" max="100" name="wides" [(ngModel)]="perMatchPlayerStat.wides"></td>
-                            </tr>
-                            <tr>
-                                <td>No Balls Bowled</td>
-                                <td><input type="number" required min="0" max="100" name="noBalls" [(ngModel)]="perMatchPlayerStat.noBalls"></td>
-                            </tr>
-                        </tbody>
-                    </ng-container>
-                </table>
-            </div>
-        
-        <br>
-        <div id='matchData' class='inline'>
-            <table border="1" class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp">
-                <thead>
-                    <th>Match Date</th>
-                    <th>Match Type</th>
-                </thead>
-                    <tbody>
-                        <td><input type="date" required name="date" [(ngModel)]="perMatchPlayerStat.date"></td>
-                        <td><select required name="matchType" id="" [(ngModel)]="perMatchPlayerStat.matchType">
-                            <ng-container *ngFor="let key of this.matchTypeKeys">
-                                <option [value]='key.value'>{{key.value}}</option>
-                            <!-- <option [value]="UNKNOWN">UNKNOWN</option>
-                            <option [value]="TOURNAMENT_MATCH">TOURNAMENT</option>
-                            <option [value]="PRACTICE_MATCH">PRACTICE MATCH</option> -->
-                            </ng-container>
-                        </select></td>
-                    </tbody>
-            </table>
-        </div>
-    </ng-container>
-    <br>
-        <button type="submit" (click)="updateData(form);">Submit</button>
-
-    </form>
-</div>
+</ng-container>

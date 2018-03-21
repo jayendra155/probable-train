@@ -1,47 +1,65 @@
-<form action="#">
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="nameFilter" name="searchText" [(ngModel)]="searchText">
-        <label class="mdl-textfield__label">Search Player name</label>
-    </div>
-</form>
+<ng-container *ngIf="elementsRecieved===null">
+    <!-- MDL Progress Bar with Indeterminate Progress -->
+    <mdl-progress [indeterminate]="true" class="center"></mdl-progress>
+</ng-container>
+<br>
+<ng-container *ngIf="serverStatus === true">
+        <!-- MDL Progress Bar with Indeterminate Progress -->
+        <mdl-progress [indeterminate]="true" class="center"></mdl-progress>
+</ng-container>
 
-<div>
-    <span class="table-center"><h6>6's  and 4's from 2018 only</h6></span>
-</div>
-<div>
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp table-center">
-        <thead>
-            <tr>
-                <th>Player name</th>
-                <th>Matches Played</th>
-                <th>Innings Batted</th>
-                <th>Runs Scored</th>
-                <th>Balls Played</th>
-                <th>Not outs</th>
-                <th>High score</th>
-                <th>Average</th>
-                <th>6s</th>
-                <th>4s</th>
-                <th>Strike Rate</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let playerStats of this.playersStats | nameFilterPipe: searchText">
+<ng-container *ngIf="elementsRecieved==0">
+    <p class="center"><span>
+                <mdl-card mdl-shadow="0">
+                        <mdl-card-title>
+                          <h2 mdl-card-title-text>No player data found</h2>
+                        </mdl-card-title>
+                </mdl-card>
+            </span></p>
+</ng-container>
+
+<ng-container *ngIf="elementsRecieved!=null && elementsRecieved > 0">
+    <form action="#">
+        <mdl-textfield floating-label type="text" name="searchText" label="Search Player name" [(ngModel)]="searchText"></mdl-textfield>
+    </form>
+    <div class="center">
+        <p class="center">
+            <span><i>6s and 4s are calculated only for matches after 31/12/2017</i></span>
+        </p>
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--1dp center">
+            <thead>
                 <tr>
-                    <td>{{playerStats.playerName}}</td>
-                    <!-- <td>{{playerStats.playerAttribute}}</td> -->
-                    <td>{{playerStats.totalMatchesPlayed}}</td>
-                    <td>{{playerStats.battingStats.inningsBatted}}</td>
-                    <td>{{playerStats.battingStats.totalRunsScored}}</td>
-                    <td>{{playerStats.battingStats.totalBallsPlayed}}</td>
-                    <td>{{playerStats.battingStats.notOuts}}</td>
-                    <td>{{playerStats.battingStats.highestScore}}</td>
-                    <td>{{playerStats.battingStats.battingAverage}}</td>
-                    <td>{{playerStats.battingStats.totalSixesScored}}</td>
-                    <td>{{playerStats.battingStats.totalFoursScored}}</td>
-                    <td>{{playerStats.battingStats.strikeRate}}</td>
+                    <th>Player name</th>
+                    <th>Matches Played</th>
+                    <th>Innings Batted</th>
+                    <th>Runs Scored</th>
+                    <th>Balls Played</th>
+                    <th>Not outs</th>
+                    <th>High score</th>
+                    <th>Average</th>
+                    <th>6s</th>
+                    <th>4s</th>
+                    <th>Strike Rate</th>
                 </tr>
-            </ng-container>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let playerStats of this.playersStats | nameFilterPipe: searchText">
+                    <tr>
+                        <td>{{playerStats.playerName}}</td>
+                        <!-- <td>{{playerStats.playerAttribute}}</td> -->
+                        <td>{{playerStats.totalMatchesPlayed}}</td>
+                        <td>{{playerStats.battingStats.inningsBatted}}</td>
+                        <td>{{playerStats.battingStats.totalRunsScored}}</td>
+                        <td>{{playerStats.battingStats.totalBallsPlayed}}</td>
+                        <td>{{playerStats.battingStats.notOuts}}</td>
+                        <td>{{playerStats.battingStats.highestScore}}</td>
+                        <td>{{playerStats.battingStats.battingAverage}}</td>
+                        <td>{{playerStats.battingStats.totalSixesScored}}</td>
+                        <td>{{playerStats.battingStats.totalFoursScored}}</td>
+                        <td>{{playerStats.battingStats.strikeRate}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</ng-container>

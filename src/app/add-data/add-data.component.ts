@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 import { Elements } from '../util/elements.enum';
 import { CssUtilService } from '../util/css-util.service';
 import { MatchType } from "./MatchType.enum";
+import { MdlSnackbarService } from '@angular-mdl/core';
 
 @Component({
   selector: 'app-add-data',
@@ -25,7 +26,8 @@ export class AddDataComponent implements OnInit, OnChanges {
   public perMatchPlayerStat: PerMatchPlayerStat;
   matchTypeKeys = Object.keys(MatchType).filter(key => !isNaN(Number(key))).map(key => ({value: MatchType[key], title: key}));
 
-  constructor(private http: Http, private cssUtilService: CssUtilService) {
+  constructor(private http: Http, private cssUtilService: CssUtilService,
+              private mdlSnackbarService: MdlSnackbarService) {
     this.page = new PagedData();
   }
 
@@ -72,9 +74,12 @@ export class AddDataComponent implements OnInit, OnChanges {
   public updateData(form: NgForm) {
     console.log(JSON.stringify(this.perMatchPlayerStat));
     const baseEndpoint = environment.serverUrl + '/addPlayerData';
+    window.alert('false behaviour');
     this.http.post(baseEndpoint, this.perMatchPlayerStat)
       .subscribe(response => {
+        this.mdlSnackbarService.showToast('Data submitted successfully', 2000);
         form.reset();
+        this.perMatchPlayerStat = new PerMatchPlayerStat();
       }, error => {
         this.handleErrorObservable(error);
       });
